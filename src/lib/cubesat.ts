@@ -76,7 +76,7 @@ export function decide(cloudClass: CloudClass, confidence: number): Analysis {
 function hash32(bytes: Uint8Array): number {
   let h = 2166136261;
   for (let i = 0; i < bytes.length; i++) {
-    h ^= bytes[i];
+    h ^= bytes[i]!;
     h = Math.imul(h, 16777619);
   }
   return h >>> 0;
@@ -122,14 +122,14 @@ export function classifyFromStats(stats: ImageStats, seedBytes: Uint8Array): Ana
 
   let bestIdx = 0;
   probs.forEach((p, i) => {
-    if (p > probs[bestIdx]) bestIdx = i;
+    if (p > probs[bestIdx]!) bestIdx = i;
   });
 
-  const cloudClass = labels[bestIdx];
-  const confidence = Math.min(0.985, Math.max(0.31, probs[bestIdx]));
+  const cloudClass = labels[bestIdx]!;
+  const confidence = Math.min(0.985, Math.max(0.31, probs[bestIdx]!));
   const analysis = decide(cloudClass, confidence);
   analysis.probabilities = labels
-    .map((label, i) => ({ label, value: probs[i] }))
+    .map((label, i) => ({ label, value: probs[i]! }))
     .sort((a, b) => b.value - a.value);
   return analysis;
 }
@@ -169,9 +169,9 @@ export async function computeImageStats(file: File): Promise<{
   let lowSat = 0;
 
   for (let i = 0; i < data.length; i += 4) {
-    const r = data[i] / 255;
-    const g = data[i + 1] / 255;
-    const b = data[i + 2] / 255;
+    const r = data[i]! / 255;
+    const g = data[i + 1]! / 255;
+    const b = data[i + 2]! / 255;
     rSum += r;
     gSum += g;
     bSum += b;
@@ -193,7 +193,7 @@ export async function computeImageStats(file: File): Promise<{
   for (let y = 1; y < size; y++) {
     for (let x = 1; x < size; x++) {
       const i = y * size + x;
-      gradSum += Math.abs(lum[i] - lum[i - 1]) + Math.abs(lum[i] - lum[i - size]);
+      gradSum += Math.abs(lum[i]! - lum[i - 1]!) + Math.abs(lum[i]! - lum[i - size]!);
     }
   }
   const texture = clamp01((gradSum / ((size - 1) * (size - 1) * 2)) * 12);
