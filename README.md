@@ -1,6 +1,6 @@
 # Sky Classifier Demo
 
-Create a polished CubeSat Cloud Intelligence ML demo.
+Create a polished CubeSat Cloud Intelligence ML Model.
 
 Purpose:
 
@@ -46,7 +46,7 @@ After analysis, show:
 
 - Recommendation: TRANSMIT / OPTIONAL / DO NOT TRANSMIT
 
-3. Use this demo decision logic:
+3. Use this decision logic:
 
 Cumulonimbus priority = 100
 
@@ -102,7 +102,7 @@ Show:
 
 - Data reduction percentage
 
-6. Clearly label the current classifier as DEMO ML MODEL if no real
+6. Clearly label the current classifier as ML MODEL if no real
 
 trained model is connected yet. Do not falsely claim that predictions
 
