@@ -1,4 +1,4 @@
-# Sky Classifier Demo
+# Sky Classifier
 
 Create a polished CubeSat Cloud Intelligence ML Model.
 
